@@ -1,0 +1,55 @@
+File Path Changes:
+	lut.v:
+	ram_ref.v:
+	ram_neighbor.v:
+		Change the absolute path of initialization file.
+Change the # of filters:
+	Filter_Bank.v: 
+		Assignment of output ports: need to change the case list to select the appropriate filter output to final output
+	RL_LJ_Top.v:
+		Mapping cells onto each filters
+	Particle_Pair_Gen_HalfShell.v:
+		In the FSM, change filter mapping related registers assignments (complex)
+		In the FSM control variable section, change the assignment to FSM_Neighbor_Particle_ID
+
+
+Change the pipeline stages of r2 and force evaluation:
+	RL_LJ_Pipeline_1st_Order.v:
+	RL_LJ_Pipeline_1st_Order_no_filter.v:
+		In FSM, WAIT_FOR_FINISH state, change the threshold value from 31 to related value
+	(Maybe don't care??)RL_LJ_Force_Evaluation_Unit.v:
+		Delay register chain from Filter_Bank output to final output
+	Filter_Logic.v:
+		Delay register chain from r2_compute output to Filter_Buffer
+		Assignment on filter_back_pressure: depending on r2_compute latency
+
+Chage the # of Evaluation Units:
+	RL_LJ_Top.v:
+	Particle_Pair_Gen_HalfShell.v:
+		In the FSM, change the state of READ_REF_PARTICLE
+		In the FSM, change the determination logic at the state of CHECK_HOME_CELL_DONE
+		In singal declaration section, need to change the size and assignment of FSM_Ref_Particle_ID
+
+Change the mapping scheme from Cell to Filters:
+	Particle_Pair_Gen_HalfShell.v
+		In the FSM
+		In the FSM control variable section, change the assignment to FSM_Neighbor_Particle_Position
+	RL_LJ_Top.v
+		Implementing particle cell memory
+		Implementing force caches
+
+Change the latency of between the read address is assigned and the acutal data read out from position memory:
+	Particle_Pair_Gen_HalfShell.v
+		Mostly at the beginning of the FSM, the # of stages of those delay registers
+		
+Periodic Boundary Condition:
+	The PBC is implemented following the formular below:
+		dx = dx - BOUNDING_BOX_SIZE_X * round(dx/BOUNDING_BOX_SIZE_X);
+		dy = dy - BOUNDING_BOX_SIZE_Y * round(dy/BOUNDING_BOX_SIZE_Y);
+		dz = dz - BOUNDING_BOX_SIZE_Z * round(dz/BOUNDING_BOX_SIZE_Z);
+	In this way, it requires a minimum # of cells in each dimension is no less than 4.
+	If the number of cells is 3 in one dimension, think about the following case:
+		Cell size: 1, 3*3*3 cells;
+		Reference particle (1.9,1.9,1.9), Neighbor particle(0,0,0);
+		dx = (1.9-0)-3*round(1.9/3)=-1.1, while the value should be 1.9.
+		

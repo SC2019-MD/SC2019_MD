@@ -1,0 +1,37 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Module: fp_sin.v
+//
+//	Function:
+//				Wrapper on top of FP_SIN, to meet the port configuration in the old design
+//				The FP_SIN IP core can have pure LUT version, or consume DSP cores at an alterntaive
+//				In the current design, we choose to use DSP to realize this IP
+//
+// Dependency:
+//				FP_SIN.v
+//
+// Latency: 35 cycles
+//
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+module fp_sin
+#(
+	parameter DATA_WIDTH = 32
+)
+(
+	input clk,
+	input rst,
+	input [DATA_WIDTH-1:0] in1,
+	output [DATA_WIDTH-1:0] result
+);
+
+	FP_SIN FP_SIN
+	(
+		.clk(clk),
+		.areset(rst),
+		.a(in1),
+		.q(result)
+	);
+
+endmodule

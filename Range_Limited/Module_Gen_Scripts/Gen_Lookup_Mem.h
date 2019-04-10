@@ -1,0 +1,1 @@
+int Gen_Lookup_Mem(int order, int term, int bin_num, int seg_num, std::string* common_path);
