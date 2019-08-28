@@ -1,0 +1,12 @@
+Dataset: ApoA1
+	r2 range is: (1.562500e-02, 2.559856e+02)
+	vdw14_real range is: (6.663957e-16, 2.111062e+14)
+	vdw8_real range is: (5.589191e-09, 4.026532e+08)
+	vdw12_real range is: (1.421564e-14, 2.748779e+11)
+	vdw6_real range is: (2.384587e-07, 1.048576e+06)
+	Fvdw_real range is: (5.589190e-09, 2.111058e+14)
+	Fvdw_poly range is: (5.589146e-09, 2.110962e+14)
+	Fc_real range is: (1.943958e-05, 4.076433e+01)
+	Fc_poly range is: (1.943956e-05, 4.076420e+01)
+	Average vdw error rate is: 0.000541%
+	Average coulomb error rate is: 0.000097%

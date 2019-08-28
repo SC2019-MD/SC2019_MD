@@ -1,0 +1,1 @@
+int Gen_Sim_Script(std::string* common_path, std::string* sim_script_out_path, std::string* sim_top_module);

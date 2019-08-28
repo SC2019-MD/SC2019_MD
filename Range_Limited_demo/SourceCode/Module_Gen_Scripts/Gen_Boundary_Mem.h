@@ -1,0 +1,1 @@
+int Gen_Boundary_Mem(std::string* common_path);

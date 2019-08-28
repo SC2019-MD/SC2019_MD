@@ -1,0 +1,9 @@
+Cutoff = 8.5 Angstrom
+Sigma = 2.1
+Epsilon = 3.984 kJ
+(The Sigma and Eps value above is the actual value used in LJ energy and force evaluation. In openMM, may need to change the input sigma and eps value to generate the above sigma value.)
+
+
+No PME, no electrostatics.
+Bounding box size is 58*49*49. For a cutoff of 8.5, forming a total of 7*6*6=252 cells.
+Periodic boundary condition applied.

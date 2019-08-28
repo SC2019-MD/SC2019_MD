@@ -1,0 +1,74 @@
+<RTL_SPEC>
+  <!-- 'name' is how this function will be called from an OpenCL kernel.
+                     'module' is the top-level HDL module name that implements the function. -->
+  
+  <FUNCTION name="RL_LJ_Evaluation" module="RL_LJ_Evaluation_OpenCL_Top">
+    <ATTRIBUTES>
+      <IS_STALL_FREE value="no"/>
+      <IS_FIXED_LATENCY value="no"/>
+      <EXPECTED_LATENCY value="35"/>
+      <CAPACITY value="1"/>
+      <HAS_SIDE_EFFECTS value="yes"/>
+      <ALLOW_MERGING value="no"/>      
+    </ATTRIBUTES>
+    <INTERFACE>
+      <AVALON port="clock" type="clock"/>
+      <AVALON port="resetn" type="resetn"/>
+      <AVALON port="ivalid" type="ivalid"/>
+      <AVALON port="iready" type="iready"/>
+      <AVALON port="ovalid" type="ovalid"/>
+      <AVALON port="oready" type="oready"/>
+<!--
+      <INPUT  port="in_ref_particle_id" width="21"/>
+	  <INPUT  port="in_neighbor_particle_id" width="21"/>
+      <INPUT  port="in_refx" width="32"/>
+	  <INPUT  port="in_refy" width="32"/>
+	  <INPUT  port="in_refz" width="32"/>
+	  <INPUT  port="in_neighborx" width="32"/>
+	  <INPUT  port="in_neighbory" width="32"/>
+	  <INPUT  port="in_neighborz" width="32"/>
+      <OUTPUT port="out_ref_particle_id" width="21"/>
+	  <OUTPUT port="out_neighbor_particle_id" width="21"/>
+	  <OUTPUT port="out_LJ_Force_X" width="32"/>
+	  <OUTPUT port="out_LJ_Force_Y" width="32"/>
+	  <OUTPUT port="out_LJ_Force_Z" width="32"/>
+-->
+      <INPUT  port="in_particle_id" width="64"/>
+	  <INPUT  port="in_reference_pos" width="128"/>
+      <INPUT  port="in_neighbor_pos" width="128"/>
+<!--      <OUTPUT port="out_particle_id" width="64"/> 		-->
+	  <OUTPUT port="out_forceoutput" width="128"/>
+
+    </INTERFACE>
+    <C_MODEL>
+      <FILE name="RL_LJ_Evaluation_c_model.cl" />
+    </C_MODEL>
+    <REQUIREMENTS>
+      <FILE name="HDL_Source/define.v" />
+      <FILE name="HDL_Source/FIFO.v" />
+	  <FILE name="HDL_Source/Filter_Buffer.v" />
+	  <FILE name="HDL_Source/Filter_Logic.v" />
+	  <FILE name="HDL_Source/r2_compute.v" />
+	  <FILE name="HDL_Source/RL_LJ_Evaluate_Pairs_1st_Order.v" />
+	  <FILE name="HDL_Source/RL_LJ_Evaluation_OpenCL_Top.v" />
+	  <FILE name="HDL_Source/FP_SUB.v" />
+	  <FILE name="HDL_Source/FP_MUL.v" />
+	  <FILE name="HDL_Source/FP_MUL_ADD.v" />
+	  <FILE name="HDL_Source/lut0_8.v" />
+	  <FILE name="HDL_Source/lut1_8.v" />
+	  <FILE name="HDL_Source/lut0_14.v" />
+	  <FILE name="HDL_Source/lut1_14.v" />
+	  <FILE name="HDL_Source/c0_8.hex" />
+	  <FILE name="HDL_Source/c1_8.hex" />
+	  <FILE name="HDL_Source/c0_14.hex" />
+	  <FILE name="HDL_Source/c1_14.hex" />
+    </REQUIREMENTS>
+	<RESOURCES>
+	  <ALUTS value="904"/>
+	  <FFS value="2971"/>
+	  <RAMS value="38"/>
+	  <MLABS value="0"/>
+	  <DSPS value="12"/>
+	</RESOURCES>
+  </FUNCTION>
+</RTL_SPEC>

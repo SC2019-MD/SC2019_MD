@@ -1,0 +1,51 @@
+11/11/2018
+    Particle_Pair_Gen_HalfShell.v:
+        The output read address is not right, when read address changes from one cell to another, it's not starting from 0. Check cell 332,333.
+        Solve: (11/12/2018)The assignment to the output FSM_to_Cell_read_addr is misaligned by 1 word.
+
+
+11/12/2018
+    Particle_Pair_Gen_HalfShell.v:
+        For each reference particle, mising the last neighbor particle from cell 322 (filter 5), value is 96h'41A56A7F4158E560420E6042.
+        Solve: (11/12/2018) There are 2 cycles delay between address assignment and data shown on the output port. Previous the last particle is not picked up before the Particle_Pair_Gen moved on to the next reference particle. Now at the 'CHECK_HOME_CELL_DONE' state, keep assigning the particle information 'FSM_to_ForceEval_xxx'.
+
+11/13/2018
+	RL_LJ_Evaluation_Unit.v:
+		Input particle ID to accumulation unit is switching between 0 (when input is not valid) and actual value. This keeps resetting the accumulation value since every time ID changed, it will reset. Need to find out why input particle ID is reset to 0 when the input is not valid.
+		Problem locations: Filter_Bank.v:
+			Sometime if the particle pair is not passing the filter, the buffer is empty. But if all the buffers are empty, the arbitration result is given 0. In that case, whenever an arbitration failed, it will generate a 0. Fix here, the particle ID should remain the same even if the arbitration is failed.
+		Fix 1: (11/13/2018) Change in Filter_Bank.v, when selecting from the results based on the arbitration result, in the default case (which means arbitration failed), keep the id as the previous value instead of 0.
+		New problem: (11/13/2018) There are cases when the reference pariticle ID reverse back from 22202 to 22201, 
+			When the reference particle move on to next one, there are still particle pairs in the filter buffer that holds the previous referen particle
+		Fix 2: (11/14/2018) Assign a new flag from Filter_Bank to Particle_Pair_Gen, only when all the filter buffers are empty, then Particle_Pair_Gen can move on to next reference particle.
+		New Problem: (11/14/2018) There should be a one cycle delay between you issue the filter buffer read request and take the data out of the buffer, but in real case, the force evaluation unit acutally taking the preivous data from the fifo.
+		Fix 3: (11/14/2018) When assigning the output ports in Filter_Bank.v, used to use 'arbitration_result' as the selection signal. However this signal is also used as the read request for FIFOs. Since there is a one cycle delay here, implement a 'prev_arbitration_result' signal as selection signal for output.
+		New Problem: (11/14/2018) RL_LJ_Evaluation_Unit.v, the output force missing particle pairs (22202, 22201). 
+		Fix 4: (11/14/2018) In Filter_Logic.v, when passing the particle ID from input to output, there's one more cycle delay added (should be 17, implemented 18 by mistake). Change the particle ID delay register stages and fixed the issue.
+		
+		
+11/19/2018
+	Matlab script issue: GenInputCellList_ApoA1.m
+		Bug: the read in particle from input file is in double format, when covert to single, it introduces error. For example:
+		Bug Example: cell 222, element 2, pos_x = 13.567, from position_data(46623,1). However, when print out fprintf('%f',cell_particle(cell_id, 2,1)), the result is 13.5657001
+		Bug root: When load in the data from input file, in the following line: line_elements = textscan(tline,'%f32'), the read in value is already off. For the last element, is suppose to be (42.109,50.054,26.189), instead what is stored is (42.109001,50.054001,26.188999)
+		Some new discovery:
+			Check the following:
+				K>> fprintf('%f\n',13.5670)
+				13.567000
+				K>> fprintf('%f\n',single(-42.729) + single(56.296))
+				13.567001
+				K>> fprintf('%f\n',single(-42.729 + 56.296))
+				13.567000
+		Workaround: read in all the input data as double, find the min and max in each dimension also in double, perform shift in double. Then convert to single before assign to a new array. In this way, the pre-processed data will be stored correctly.
+
+		
+01/07/2019
+	RL_LJ_Top.v:
+		When the last reference particle is done evaluation and accumulation, the ref_forceoutput_valid signal is not set as high.
+		Problem location: the ref_forceoutput_valid signal is connect to the Partial_Force_Acc.v. When it detects the change of particle id, it will output the current value in the accumulator and set the valid signal. But only the particle id from a valid input is passed down from Filter_Bank.v. When the last reference particle has finished evaluation, there is no more valid input, thus the particle id will always remain as the previous value, thus the output valid signal will never set since there's no change in particle id.
+		Possible fix:
+			Fix 1: Filter_Bank.v: when the input is not valid, still pass down the input reference particle id. (May have the case that reference particle id is jumping back and forth.....)
+			Fix 2: Particle_Pair_Gen_HalfShell.v: when all the input pairs are done evaluation, still output valid signal, but set all the output value as 0, generate dummy signal thus trigger the output valid signal for the last reference particle's accumulated result. The output result is 0, thus even accumulated to the current value is fine.
+				Update: This solution is not working. Assigning an all 0 input, but it won't pass the filter, thus the dummy input will not appear on the force evaluation input
+			Fix 3: Assign the 'ref_forceoutput_valid' as high for one cycle a few cycles before Particle_Pair_Gen left 'WAIT_FOR_FINISH' stage. Need extra wire from this module.

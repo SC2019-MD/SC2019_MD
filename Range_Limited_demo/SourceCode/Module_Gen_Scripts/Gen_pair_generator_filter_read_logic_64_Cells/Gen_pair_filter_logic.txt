@@ -1,0 +1,294 @@
+						if(FSM_Filter_Sel_Cell[2] == 1'b0)			// Processing the 1st neighbor cell
+							begin
+							FSM_Filter_Done_Processing[2] <= 1'b0;		// Processing not finished
+							if (Cell_to_FSM_read_success_bit[2])
+								FSM_Filter_Pause_Processing[2] <= 1'b0;
+								begin
+								if(FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Sel_Cell[2] <= 1'b0;
+									FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] + 1'b1;
+									end
+								else
+									begin
+									FSM_Filter_Sel_Cell[2] <= 1'b1;
+									FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] <= 1;			// Start from address 1 for the next cell
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[2] <= 1'b1;
+								FSM_Filter_Sel_Cell[2] <= 1'b0;
+								FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH];
+								end
+							end
+						else					// Processing the 2nd neighbor cell
+							begin
+							FSM_Filter_Sel_Cell[2] <= FSM_Filter_Sel_Cell[2];					// Sel bit remains
+							if (Cell_to_FSM_read_success_bit[2])
+								begin
+								FSM_Filter_Pause_Processing[2] <= 1'b0;
+								if(FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] + 1'b1;
+									FSM_Filter_Done_Processing[2] <= 1'b0;
+									end
+								else
+									begin
+									FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH];
+									FSM_Filter_Done_Processing[2] <= 1'b1;								// Processing done
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[2] <= 1'b1;
+								FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH];
+								FSM_Filter_Done_Processing[2] <= 1'b0;
+								end
+							end
+
+						if(FSM_Filter_Sel_Cell[3] == 1'b0)			// Processing the 1st neighbor cell
+							begin
+							FSM_Filter_Done_Processing[3] <= 1'b0;		// Processing not finished
+							if (Cell_to_FSM_read_success_bit[3])
+								FSM_Filter_Pause_Processing[3] <= 1'b0;
+								begin
+								if(FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Sel_Cell[3] <= 1'b0;
+									FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] + 1'b1;
+									end
+								else
+									begin
+									FSM_Filter_Sel_Cell[3] <= 1'b1;
+									FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] <= 1;			// Start from address 1 for the next cell
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[3] <= 1'b1;
+								FSM_Filter_Sel_Cell[3] <= 1'b0;
+								FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH];
+								end
+							end
+						else					// Processing the 2nd neighbor cell
+							begin
+							FSM_Filter_Sel_Cell[3] <= FSM_Filter_Sel_Cell[3];					// Sel bit remains
+							if (Cell_to_FSM_read_success_bit[3])
+								begin
+								FSM_Filter_Pause_Processing[3] <= 1'b0;
+								if(FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] + 1'b1;
+									FSM_Filter_Done_Processing[3] <= 1'b0;
+									end
+								else
+									begin
+									FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH];
+									FSM_Filter_Done_Processing[3] <= 1'b1;								// Processing done
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[3] <= 1'b1;
+								FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[4*CELL_ADDR_WIDTH-1:3*CELL_ADDR_WIDTH];
+								FSM_Filter_Done_Processing[3] <= 1'b0;
+								end
+							end
+
+						if(FSM_Filter_Sel_Cell[4] == 1'b0)			// Processing the 1st neighbor cell
+							begin
+							FSM_Filter_Done_Processing[4] <= 1'b0;		// Processing not finished
+							if (Cell_to_FSM_read_success_bit[4])
+								FSM_Filter_Pause_Processing[4] <= 1'b0;
+								begin
+								if(FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Sel_Cell[4] <= 1'b0;
+									FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] + 1'b1;
+									end
+								else
+									begin
+									FSM_Filter_Sel_Cell[4] <= 1'b1;
+									FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] <= 1;			// Start from address 1 for the next cell
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[4] <= 1'b1;
+								FSM_Filter_Sel_Cell[4] <= 1'b0;
+								FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH];
+								end
+							end
+						else					// Processing the 2nd neighbor cell
+							begin
+							FSM_Filter_Sel_Cell[4] <= FSM_Filter_Sel_Cell[4];					// Sel bit remains
+							if (Cell_to_FSM_read_success_bit[4])
+								begin
+								FSM_Filter_Pause_Processing[4] <= 1'b0;
+								if(FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] + 1'b1;
+									FSM_Filter_Done_Processing[4] <= 1'b0;
+									end
+								else
+									begin
+									FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH];
+									FSM_Filter_Done_Processing[4] <= 1'b1;								// Processing done
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[4] <= 1'b1;
+								FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[5*CELL_ADDR_WIDTH-1:4*CELL_ADDR_WIDTH];
+								FSM_Filter_Done_Processing[4] <= 1'b0;
+								end
+							end
+
+						if(FSM_Filter_Sel_Cell[5] == 1'b0)			// Processing the 1st neighbor cell
+							begin
+							FSM_Filter_Done_Processing[5] <= 1'b0;		// Processing not finished
+							if (Cell_to_FSM_read_success_bit[5])
+								FSM_Filter_Pause_Processing[5] <= 1'b0;
+								begin
+								if(FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[9*CELL_ADDR_WIDTH-1:8*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Sel_Cell[5] <= 1'b0;
+									FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] + 1'b1;
+									end
+								else
+									begin
+									FSM_Filter_Sel_Cell[5] <= 1'b1;
+									FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] <= 1;			// Start from address 1 for the next cell
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[5] <= 1'b1;
+								FSM_Filter_Sel_Cell[5] <= 1'b0;
+								FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH];
+								end
+							end
+						else					// Processing the 2nd neighbor cell
+							begin
+							FSM_Filter_Sel_Cell[5] <= FSM_Filter_Sel_Cell[5];					// Sel bit remains
+							if (Cell_to_FSM_read_success_bit[5])
+								begin
+								FSM_Filter_Pause_Processing[5] <= 1'b0;
+								if(FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[10*CELL_ADDR_WIDTH-1:9*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] + 1'b1;
+									FSM_Filter_Done_Processing[5] <= 1'b0;
+									end
+								else
+									begin
+									FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH];
+									FSM_Filter_Done_Processing[5] <= 1'b1;								// Processing done
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[5] <= 1'b1;
+								FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH];
+								FSM_Filter_Done_Processing[5] <= 1'b0;
+								end
+							end
+
+						if(FSM_Filter_Sel_Cell[6] == 1'b0)			// Processing the 1st neighbor cell
+							begin
+							FSM_Filter_Done_Processing[6] <= 1'b0;		// Processing not finished
+							if (Cell_to_FSM_read_success_bit[6])
+								FSM_Filter_Pause_Processing[6] <= 1'b0;
+								begin
+								if(FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[11*CELL_ADDR_WIDTH-1:10*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Sel_Cell[6] <= 1'b0;
+									FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] + 1'b1;
+									end
+								else
+									begin
+									FSM_Filter_Sel_Cell[6] <= 1'b1;
+									FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] <= 1;			// Start from address 1 for the next cell
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[6] <= 1'b1;
+								FSM_Filter_Sel_Cell[6] <= 1'b0;
+								FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH];
+								end
+							end
+						else					// Processing the 2nd neighbor cell
+							begin
+							FSM_Filter_Sel_Cell[6] <= FSM_Filter_Sel_Cell[6];					// Sel bit remains
+							if (Cell_to_FSM_read_success_bit[6])
+								begin
+								FSM_Filter_Pause_Processing[6] <= 1'b0;
+								if(FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[12*CELL_ADDR_WIDTH-1:11*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] + 1'b1;
+									FSM_Filter_Done_Processing[6] <= 1'b0;
+									end
+								else
+									begin
+									FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH];
+									FSM_Filter_Done_Processing[6] <= 1'b1;								// Processing done
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[6] <= 1'b1;
+								FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[7*CELL_ADDR_WIDTH-1:6*CELL_ADDR_WIDTH];
+								FSM_Filter_Done_Processing[6] <= 1'b0;
+								end
+							end
+
+						if(FSM_Filter_Sel_Cell[7] == 1'b0)			// Processing the 1st neighbor cell
+							begin
+							FSM_Filter_Done_Processing[7] <= 1'b0;		// Processing not finished
+							if (Cell_to_FSM_read_success_bit[7])
+								FSM_Filter_Pause_Processing[7] <= 1'b0;
+								begin
+								if(FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[13*CELL_ADDR_WIDTH-1:12*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Sel_Cell[7] <= 1'b0;
+									FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] + 1'b1;
+									end
+								else
+									begin
+									FSM_Filter_Sel_Cell[7] <= 1'b1;
+									FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] <= 1;			// Start from address 1 for the next cell
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[7] <= 1'b1;
+								FSM_Filter_Sel_Cell[7] <= 1'b0;
+								FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH];
+								end
+							end
+						else					// Processing the 2nd neighbor cell
+							begin
+							FSM_Filter_Sel_Cell[7] <= FSM_Filter_Sel_Cell[7];					// Sel bit remains
+							if (Cell_to_FSM_read_success_bit[7])
+								begin
+								FSM_Filter_Pause_Processing[7] <= 1'b0;
+								if(FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] < FSM_Cell_Particle_Num[14*CELL_ADDR_WIDTH-1:13*CELL_ADDR_WIDTH])
+									begin
+									FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] + 1'b1;
+									FSM_Filter_Done_Processing[7] <= 1'b0;
+									end
+								else
+									begin
+									FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH];
+									FSM_Filter_Done_Processing[7] <= 1'b1;								// Processing done
+									end
+								end
+							else
+								begin
+								FSM_Filter_Pause_Processing[7] <= 1'b1;
+								FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH] <= FSM_Filter_Read_Addr[8*CELL_ADDR_WIDTH-1:7*CELL_ADDR_WIDTH];
+								FSM_Filter_Done_Processing[7] <= 1'b0;
+								end
+							end
+

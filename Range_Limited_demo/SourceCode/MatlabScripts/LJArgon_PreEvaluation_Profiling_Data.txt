@@ -1,0 +1,23 @@
+Dataset: LJArgon
+	r2 range is: (2.500000e-01, 7.223713e+01)
+	vdw14_real range is: (1.370467e-07, 2.304688e+10)
+	vdw14_poly range is: (1.370385e-07, 2.304582e+10)
+	vdw8_real range is: (3.011649e-04, 2.099357e+06)
+	vdw8_poly range is: (3.011584e-04, 2.099323e+06)
+	vdw12_real range is: (8.249885e-07, 4.801432e+08)
+	vdw12_poly range is: (8.249508e-07, 4.801267e+08)
+	vdw6_real range is: (3.625882e-03, 8.747321e+04)
+	vdw6_poly range is: (3.625834e-03, 8.747234e+04)
+	Fvdw_real range is: (-1.748585e+00, 2.304478e+10)
+	Fvdw_poly range is: (-1.748600e+00, 2.304372e+10)
+	Evdw_real range is: (-3.983975e+00, 4.800558e+08)
+	Evdw_poly range is: (-3.983955e+00, 4.800392e+08)
+	Fc_real range is: (3.254995e-05, 1.598752e-01)
+	Fc_poly range is: (3.254982e-05, 1.598747e-01)
+	Ec_real range is: (2.351315e-03, 3.996879e-02)
+	Ec_poly range is: (2.351313e-03, 3.996877e-02)
+	Ftotal_real range is: (-1.747433e+00, 2.304478e+10)
+	Ftotal_poly range is: (-1.747448e+00, 2.304372e+10)
+	LJ Average error rate is: Force 0.000911%, Energy 0.000663%
+	Coulomb Average error rate is: Force 0.000106%, Energy 0.000022%
+	Total Average error rate is: Force 0.000924%
