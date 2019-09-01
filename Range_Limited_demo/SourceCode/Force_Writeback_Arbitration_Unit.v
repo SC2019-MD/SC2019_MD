@@ -1,6 +1,6 @@
 module Force_Writeback_Arbitration_Unit
 #(
-	parameter BINARY_222							= 9'b010010010,			// xyz
+	parameter BINARY_222							= 9'b010010010,
 	parameter BINARY_223							= 9'b010010011,
 	parameter BINARY_231							= 9'b010011001,
 	parameter BINARY_232							= 9'b010011010,
@@ -720,27 +720,27 @@ always@(*)
 always@(*)
 	begin
 	case(Arbitration_1_1_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_1_mid = ref_force_data_from_FIFO[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_1_mid = neighbor_force_data_from_FIFO_1[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_1_mid = neighbor_force_data_from_FIFO_1[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_1_mid = neighbor_force_data_from_FIFO_1[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_1_mid = neighbor_force_data_from_FIFO_2[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_1_mid = neighbor_force_data_from_FIFO_2[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -750,27 +750,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_1_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_1_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_1_top = neighbor_force_data_from_FIFO_1[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_1_top = neighbor_force_data_from_FIFO_1[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_1_top = neighbor_force_data_from_FIFO_2[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_1_top = neighbor_force_data_from_FIFO_2[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_1_top = neighbor_force_data_from_FIFO_2[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -780,27 +780,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_1_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_1_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_1_bottom = neighbor_force_data_from_FIFO_1[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_1_bottom = neighbor_force_data_from_FIFO_1[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_1_bottom = neighbor_force_data_from_FIFO_2[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_1_bottom = neighbor_force_data_from_FIFO_2[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_1_bottom = 0;
 			end
@@ -810,27 +810,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_2_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_2_mid = ref_force_data_from_FIFO[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_2_mid = neighbor_force_data_from_FIFO_1[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_2_mid = neighbor_force_data_from_FIFO_1[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_2_mid = neighbor_force_data_from_FIFO_1[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_2_mid = neighbor_force_data_from_FIFO_2[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_2_mid = neighbor_force_data_from_FIFO_2[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -840,27 +840,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_2_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_2_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_2_top = neighbor_force_data_from_FIFO_1[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_2_top = neighbor_force_data_from_FIFO_1[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_2_top = neighbor_force_data_from_FIFO_2[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_2_top = neighbor_force_data_from_FIFO_2[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_2_top = neighbor_force_data_from_FIFO_2[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -870,27 +870,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_2_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_2_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_2_bottom = neighbor_force_data_from_FIFO_1[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_2_bottom = neighbor_force_data_from_FIFO_1[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_2_bottom = neighbor_force_data_from_FIFO_2[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_2_bottom = neighbor_force_data_from_FIFO_2[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_2_bottom = 0;
 			end
@@ -900,27 +900,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_3_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_3_mid = ref_force_data_from_FIFO[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_3_mid = neighbor_force_data_from_FIFO_1[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_3_mid = neighbor_force_data_from_FIFO_1[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_3_mid = neighbor_force_data_from_FIFO_1[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_3_mid = neighbor_force_data_from_FIFO_2[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_3_mid = neighbor_force_data_from_FIFO_2[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -930,27 +930,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_3_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_3_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_3_top = neighbor_force_data_from_FIFO_1[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_3_top = neighbor_force_data_from_FIFO_1[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_3_top = neighbor_force_data_from_FIFO_2[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_3_top = neighbor_force_data_from_FIFO_2[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_3_top = neighbor_force_data_from_FIFO_2[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -960,27 +960,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_3_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_3_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_3_bottom = neighbor_force_data_from_FIFO_1[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_3_bottom = neighbor_force_data_from_FIFO_1[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_3_bottom = neighbor_force_data_from_FIFO_2[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_3_bottom = neighbor_force_data_from_FIFO_2[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_3_bottom = 0;
 			end
@@ -990,27 +990,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_4_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_4_mid = ref_force_data_from_FIFO[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_4_mid = neighbor_force_data_from_FIFO_1[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_4_mid = neighbor_force_data_from_FIFO_1[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_4_mid = neighbor_force_data_from_FIFO_1[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_4_mid = neighbor_force_data_from_FIFO_2[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_4_mid = neighbor_force_data_from_FIFO_2[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1020,27 +1020,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_4_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_4_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_4_top = neighbor_force_data_from_FIFO_1[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_4_top = neighbor_force_data_from_FIFO_1[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_4_top = neighbor_force_data_from_FIFO_2[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_4_top = neighbor_force_data_from_FIFO_2[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_4_top = neighbor_force_data_from_FIFO_2[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1050,27 +1050,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_1_4_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_1_4_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_1_4_bottom = neighbor_force_data_from_FIFO_1[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_1_4_bottom = neighbor_force_data_from_FIFO_1[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_1_4_bottom = neighbor_force_data_from_FIFO_2[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_1_4_bottom = neighbor_force_data_from_FIFO_2[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_1_4_bottom = 0;
 			end
@@ -1080,27 +1080,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_1_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_1_mid = ref_force_data_from_FIFO[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_1_mid = neighbor_force_data_from_FIFO_1[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_1_mid = neighbor_force_data_from_FIFO_1[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_1_mid = neighbor_force_data_from_FIFO_1[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_1_mid = neighbor_force_data_from_FIFO_2[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_1_mid = neighbor_force_data_from_FIFO_2[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1110,27 +1110,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_1_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_1_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_1_top = neighbor_force_data_from_FIFO_1[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_1_top = neighbor_force_data_from_FIFO_1[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_1_top = neighbor_force_data_from_FIFO_2[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_1_top = neighbor_force_data_from_FIFO_2[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_1_top = neighbor_force_data_from_FIFO_2[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1140,27 +1140,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_1_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_1_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_1_bottom = neighbor_force_data_from_FIFO_1[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_1_bottom = neighbor_force_data_from_FIFO_1[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_1_bottom = neighbor_force_data_from_FIFO_2[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_1_bottom = neighbor_force_data_from_FIFO_2[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_1_bottom = 0;
 			end
@@ -1170,27 +1170,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_2_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_2_mid = ref_force_data_from_FIFO[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_2_mid = neighbor_force_data_from_FIFO_1[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_2_mid = neighbor_force_data_from_FIFO_1[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_2_mid = neighbor_force_data_from_FIFO_1[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_2_mid = neighbor_force_data_from_FIFO_2[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_2_mid = neighbor_force_data_from_FIFO_2[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1200,27 +1200,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_2_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_2_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_2_top = neighbor_force_data_from_FIFO_1[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_2_top = neighbor_force_data_from_FIFO_1[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_2_top = neighbor_force_data_from_FIFO_2[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_2_top = neighbor_force_data_from_FIFO_2[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_2_top = neighbor_force_data_from_FIFO_2[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1230,27 +1230,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_2_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_2_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_2_bottom = neighbor_force_data_from_FIFO_1[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_2_bottom = neighbor_force_data_from_FIFO_1[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_2_bottom = neighbor_force_data_from_FIFO_2[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_2_bottom = neighbor_force_data_from_FIFO_2[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_2_bottom = 0;
 			end
@@ -1260,27 +1260,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_3_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_3_mid = ref_force_data_from_FIFO[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_3_mid = neighbor_force_data_from_FIFO_1[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_3_mid = neighbor_force_data_from_FIFO_1[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_3_mid = neighbor_force_data_from_FIFO_1[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_3_mid = neighbor_force_data_from_FIFO_2[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_3_mid = neighbor_force_data_from_FIFO_2[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1290,27 +1290,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_3_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_3_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_3_top = neighbor_force_data_from_FIFO_1[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_3_top = neighbor_force_data_from_FIFO_1[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_3_top = neighbor_force_data_from_FIFO_2[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_3_top = neighbor_force_data_from_FIFO_2[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_3_top = neighbor_force_data_from_FIFO_2[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1320,27 +1320,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_3_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_3_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_3_bottom = neighbor_force_data_from_FIFO_1[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_3_bottom = neighbor_force_data_from_FIFO_1[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_3_bottom = neighbor_force_data_from_FIFO_2[2*FORCE_EVAL_FIFO_DATA_WIDTH-1:1*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_3_bottom = neighbor_force_data_from_FIFO_2[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_3_bottom = 0;
 			end
@@ -1350,27 +1350,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_4_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_4_mid = ref_force_data_from_FIFO[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_4_mid = neighbor_force_data_from_FIFO_1[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_4_mid = neighbor_force_data_from_FIFO_1[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_4_mid = neighbor_force_data_from_FIFO_1[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_4_mid = neighbor_force_data_from_FIFO_2[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_4_mid = neighbor_force_data_from_FIFO_2[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1380,27 +1380,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_4_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_4_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_4_top = neighbor_force_data_from_FIFO_1[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_4_top = neighbor_force_data_from_FIFO_1[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_4_top = neighbor_force_data_from_FIFO_2[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_4_top = neighbor_force_data_from_FIFO_2[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_4_top = neighbor_force_data_from_FIFO_2[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1410,27 +1410,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_2_4_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_2_4_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_2_4_bottom = neighbor_force_data_from_FIFO_1[1*FORCE_EVAL_FIFO_DATA_WIDTH-1:0*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_2_4_bottom = neighbor_force_data_from_FIFO_1[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_2_4_bottom = neighbor_force_data_from_FIFO_2[3*FORCE_EVAL_FIFO_DATA_WIDTH-1:2*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_2_4_bottom = neighbor_force_data_from_FIFO_2[4*FORCE_EVAL_FIFO_DATA_WIDTH-1:3*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_2_4_bottom = 0;
 			end
@@ -1440,27 +1440,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_1_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_1_mid = ref_force_data_from_FIFO[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_1_mid = neighbor_force_data_from_FIFO_1[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_1_mid = neighbor_force_data_from_FIFO_1[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_1_mid = neighbor_force_data_from_FIFO_1[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_1_mid = neighbor_force_data_from_FIFO_2[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_1_mid = neighbor_force_data_from_FIFO_2[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1470,27 +1470,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_1_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_1_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_1_top = neighbor_force_data_from_FIFO_1[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_1_top = neighbor_force_data_from_FIFO_1[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_1_top = neighbor_force_data_from_FIFO_2[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_1_top = neighbor_force_data_from_FIFO_2[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_1_top = neighbor_force_data_from_FIFO_2[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1500,27 +1500,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_1_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_1_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_1_bottom = neighbor_force_data_from_FIFO_1[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_1_bottom = neighbor_force_data_from_FIFO_1[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_1_bottom = neighbor_force_data_from_FIFO_2[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_1_bottom = neighbor_force_data_from_FIFO_2[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_1_bottom = 0;
 			end
@@ -1530,27 +1530,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_2_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_2_mid = ref_force_data_from_FIFO[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_2_mid = neighbor_force_data_from_FIFO_1[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_2_mid = neighbor_force_data_from_FIFO_1[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_2_mid = neighbor_force_data_from_FIFO_1[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_2_mid = neighbor_force_data_from_FIFO_2[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_2_mid = neighbor_force_data_from_FIFO_2[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1560,27 +1560,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_2_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_2_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_2_top = neighbor_force_data_from_FIFO_1[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_2_top = neighbor_force_data_from_FIFO_1[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_2_top = neighbor_force_data_from_FIFO_2[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_2_top = neighbor_force_data_from_FIFO_2[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_2_top = neighbor_force_data_from_FIFO_2[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1590,27 +1590,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_2_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_2_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_2_bottom = neighbor_force_data_from_FIFO_1[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_2_bottom = neighbor_force_data_from_FIFO_1[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_2_bottom = neighbor_force_data_from_FIFO_2[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_2_bottom = neighbor_force_data_from_FIFO_2[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_2_bottom = 0;
 			end
@@ -1620,27 +1620,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_3_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_3_mid = ref_force_data_from_FIFO[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_3_mid = neighbor_force_data_from_FIFO_1[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_3_mid = neighbor_force_data_from_FIFO_1[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_3_mid = neighbor_force_data_from_FIFO_1[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_3_mid = neighbor_force_data_from_FIFO_2[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_3_mid = neighbor_force_data_from_FIFO_2[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1650,27 +1650,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_3_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_3_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_3_top = neighbor_force_data_from_FIFO_1[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_3_top = neighbor_force_data_from_FIFO_1[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_3_top = neighbor_force_data_from_FIFO_2[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_3_top = neighbor_force_data_from_FIFO_2[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_3_top = neighbor_force_data_from_FIFO_2[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1680,27 +1680,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_3_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_3_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_3_bottom = neighbor_force_data_from_FIFO_1[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_3_bottom = neighbor_force_data_from_FIFO_1[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_3_bottom = neighbor_force_data_from_FIFO_2[6*FORCE_EVAL_FIFO_DATA_WIDTH-1:5*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_3_bottom = neighbor_force_data_from_FIFO_2[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_3_bottom = 0;
 			end
@@ -1710,27 +1710,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_4_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_4_mid = ref_force_data_from_FIFO[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_4_mid = neighbor_force_data_from_FIFO_1[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_4_mid = neighbor_force_data_from_FIFO_1[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_4_mid = neighbor_force_data_from_FIFO_1[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_4_mid = neighbor_force_data_from_FIFO_2[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_4_mid = neighbor_force_data_from_FIFO_2[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1740,27 +1740,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_4_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_4_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_4_top = neighbor_force_data_from_FIFO_1[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_4_top = neighbor_force_data_from_FIFO_1[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_4_top = neighbor_force_data_from_FIFO_2[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_4_top = neighbor_force_data_from_FIFO_2[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_4_top = neighbor_force_data_from_FIFO_2[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1770,27 +1770,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_3_4_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_3_4_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_3_4_bottom = neighbor_force_data_from_FIFO_1[5*FORCE_EVAL_FIFO_DATA_WIDTH-1:4*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_3_4_bottom = neighbor_force_data_from_FIFO_1[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_3_4_bottom = neighbor_force_data_from_FIFO_2[7*FORCE_EVAL_FIFO_DATA_WIDTH-1:6*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_3_4_bottom = neighbor_force_data_from_FIFO_2[8*FORCE_EVAL_FIFO_DATA_WIDTH-1:7*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_3_4_bottom = 0;
 			end
@@ -1800,27 +1800,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_1_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_1_mid = ref_force_data_from_FIFO[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_1_mid = neighbor_force_data_from_FIFO_1[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_1_mid = neighbor_force_data_from_FIFO_1[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_1_mid = neighbor_force_data_from_FIFO_1[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_1_mid = neighbor_force_data_from_FIFO_2[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_1_mid = neighbor_force_data_from_FIFO_2[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1830,27 +1830,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_1_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_1_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_1_top = neighbor_force_data_from_FIFO_1[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_1_top = neighbor_force_data_from_FIFO_1[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_1_top = neighbor_force_data_from_FIFO_2[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_1_top = neighbor_force_data_from_FIFO_2[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_1_top = neighbor_force_data_from_FIFO_2[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1860,27 +1860,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_1_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_1_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_1_bottom = neighbor_force_data_from_FIFO_1[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_1_bottom = neighbor_force_data_from_FIFO_1[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_1_bottom = neighbor_force_data_from_FIFO_2[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_1_bottom = neighbor_force_data_from_FIFO_2[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_1_bottom = 0;
 			end
@@ -1890,27 +1890,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_2_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_2_mid = ref_force_data_from_FIFO[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_2_mid = neighbor_force_data_from_FIFO_1[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_2_mid = neighbor_force_data_from_FIFO_1[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_2_mid = neighbor_force_data_from_FIFO_1[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_2_mid = neighbor_force_data_from_FIFO_2[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_2_mid = neighbor_force_data_from_FIFO_2[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1920,27 +1920,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_2_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_2_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_2_top = neighbor_force_data_from_FIFO_1[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_2_top = neighbor_force_data_from_FIFO_1[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_2_top = neighbor_force_data_from_FIFO_2[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_2_top = neighbor_force_data_from_FIFO_2[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_2_top = neighbor_force_data_from_FIFO_2[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -1950,27 +1950,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_2_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_2_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_2_bottom = neighbor_force_data_from_FIFO_1[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_2_bottom = neighbor_force_data_from_FIFO_1[13*FORCE_EVAL_FIFO_DATA_WIDTH-1:12*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_2_bottom = neighbor_force_data_from_FIFO_2[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_2_bottom = neighbor_force_data_from_FIFO_2[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_2_bottom = 0;
 			end
@@ -1980,27 +1980,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_3_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_3_mid = ref_force_data_from_FIFO[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_3_mid = neighbor_force_data_from_FIFO_1[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_3_mid = neighbor_force_data_from_FIFO_1[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_3_mid = neighbor_force_data_from_FIFO_1[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_3_mid = neighbor_force_data_from_FIFO_2[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_3_mid = neighbor_force_data_from_FIFO_2[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -2010,27 +2010,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_3_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_3_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_3_top = neighbor_force_data_from_FIFO_1[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_3_top = neighbor_force_data_from_FIFO_1[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_3_top = neighbor_force_data_from_FIFO_2[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_3_top = neighbor_force_data_from_FIFO_2[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_3_top = neighbor_force_data_from_FIFO_2[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -2040,27 +2040,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_3_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_3_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_3_bottom = neighbor_force_data_from_FIFO_1[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_3_bottom = neighbor_force_data_from_FIFO_1[14*FORCE_EVAL_FIFO_DATA_WIDTH-1:13*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_3_bottom = neighbor_force_data_from_FIFO_2[10*FORCE_EVAL_FIFO_DATA_WIDTH-1:9*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_3_bottom = neighbor_force_data_from_FIFO_2[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_3_bottom = 0;
 			end
@@ -2070,27 +2070,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_4_mid)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_4_mid = ref_force_data_from_FIFO[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_4_mid = neighbor_force_data_from_FIFO_1[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_4_mid = neighbor_force_data_from_FIFO_1[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_4_mid = neighbor_force_data_from_FIFO_1[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_4_mid = neighbor_force_data_from_FIFO_2[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_4_mid = neighbor_force_data_from_FIFO_2[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -2100,27 +2100,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_4_top)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_4_top = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_4_top = neighbor_force_data_from_FIFO_1[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_4_top = neighbor_force_data_from_FIFO_1[16*FORCE_EVAL_FIFO_DATA_WIDTH-1:15*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_4_top = neighbor_force_data_from_FIFO_2[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_4_top = neighbor_force_data_from_FIFO_2[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_4_top = neighbor_force_data_from_FIFO_2[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
@@ -2130,27 +2130,27 @@ always@(*)
 			end
 	endcase
 	case(Arbitration_4_4_bottom)
-		6'b100000:
+		6'b000001:
 			begin
 			valid_force_values_4_4_bottom = 0;
 			end
-		6'b010000:
+		6'b000010:
 			begin
 			valid_force_values_4_4_bottom = neighbor_force_data_from_FIFO_1[9*FORCE_EVAL_FIFO_DATA_WIDTH-1:8*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b001000:
+		6'b000100:
 			begin
 			valid_force_values_4_4_bottom = neighbor_force_data_from_FIFO_1[15*FORCE_EVAL_FIFO_DATA_WIDTH-1:14*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000100:
+		6'b001000:
 			begin
 			valid_force_values_4_4_bottom = neighbor_force_data_from_FIFO_2[11*FORCE_EVAL_FIFO_DATA_WIDTH-1:10*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000010:
+		6'b010000:
 			begin
 			valid_force_values_4_4_bottom = neighbor_force_data_from_FIFO_2[12*FORCE_EVAL_FIFO_DATA_WIDTH-1:11*FORCE_EVAL_FIFO_DATA_WIDTH];
 			end
-		6'b000001:
+		6'b100000:
 			begin
 			valid_force_values_4_4_bottom = 0;
 			end

@@ -53,6 +53,7 @@ module RL_LJ_Evaluation_Unit_64_Cells
 	parameter CELL_Y							= 2,
 	parameter CELL_Z							= 2,
 	// Dataset defined parameters
+	parameter CELL_ID_WIDTH					= 3,
 	parameter PARTICLE_ID_WIDTH			= 20,										// # of bit used to represent particle ID, 9*9*7 cells, each 4-bit, each cell have max of 200 particles, 8-bit
 	parameter CELL_ADDR_WIDTH				= 7,
 	// Filter parameters
@@ -114,12 +115,13 @@ module RL_LJ_Evaluation_Unit_64_Cells
 	
 	// Neighbor cell particles output assembled
 	wire [PARTICLE_ID_WIDTH-1:0] out_neighbor_particle_id;
+	
 	wire [DATA_WIDTH-1:0] out_neighbor_LJ_Force_X;
 	wire [DATA_WIDTH-1:0] out_neighbor_LJ_Force_Y;
-	wire [DATA_WIDTH-1:0] out_neighbor_LJ_Force_Z; // 222 223 231 232 233 311 312 || 313 321 322 323 331 332 333
+	wire [DATA_WIDTH-1:0] out_neighbor_LJ_Force_Z; 	// 222 223 231 232 233 311 312 || 313 321 322 323 331 332 333
 	wire out_neighbor_force_valid;
 	
-	// Only one neighbor output is non-zero, the 9-bit number is 232 (actually can be made 6-bit)
+	// Only one neighbor output is non-zero, the 9-bit number is 313 (actually can be made 6-bit)
 	assign out_neighbor_particle_data_1 = (out_neighbor_particle_id[PARTICLE_ID_WIDTH-1:CELL_ADDR_WIDTH] < 9'b011001011) ? {out_neighbor_LJ_Force_Z, out_neighbor_LJ_Force_Y, out_neighbor_LJ_Force_X, out_neighbor_particle_id, out_neighbor_force_valid} : 0;
 	assign out_neighbor_particle_data_2 = (out_neighbor_particle_id[PARTICLE_ID_WIDTH-1:CELL_ADDR_WIDTH] < 9'b011001011) ? 0 : {out_neighbor_LJ_Force_Z, out_neighbor_LJ_Force_Y, out_neighbor_LJ_Force_X, out_neighbor_particle_id, out_neighbor_force_valid};
 	

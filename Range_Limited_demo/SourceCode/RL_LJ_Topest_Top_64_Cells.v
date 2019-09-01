@@ -32,15 +32,24 @@ module RL_LJ_Topest_Top_64_Cells
 	parameter FIXED_POINT_WIDTH 			= 24,//32,
 	parameter FILTER_IN_PATCH_0_BITS		= 0,//8'b0,									// Width = FIXED_POINT_WIDTH - 1 - 23
 	// Bounding box parameters, used when applying PBC inside r2 evaluation
-	parameter BOUNDING_BOX_X				= 32'h426E0000,							// 8.5*7 = 59.5 in IEEE floating point		//32'h42D80000,							// 12*9 = 108 in IEEE floating point
-	parameter BOUNDING_BOX_Y				= 32'h424C0000,							// 8.5*6 = 51 in IEEE floating point		//32'h42D80000,							// 12*9 = 108 in IEEE floating point
-	parameter BOUNDING_BOX_Z				= 32'h424C0000,							// 8.5*6 = 51 in IEEE floating point		//32'h42A80000,							// 12*7 = 84 in IEEE floating point
-	parameter HALF_BOUNDING_BOX_X_POS 	= 32'h41EE0000,							// 59.5/2 = 29.75 in IEEE floating point
-	parameter HALF_BOUNDING_BOX_Y_POS 	= 32'h41CC0000,							// 51/2 = 25.5 in IEEE floating point
-	parameter HALF_BOUNDING_BOX_Z_POS 	= 32'h41CC0000,							// 51/2 = 25.5 in IEEE floating point
-	parameter HALF_BOUNDING_BOX_X_NEG 	= 32'hC1EE0000,							// -59.5/2 = -29.75 in IEEE floating point
-	parameter HALF_BOUNDING_BOX_Y_NEG 	= 32'hC1CC0000,							// -51/2 = -25.5 in IEEE floating point
-	parameter HALF_BOUNDING_BOX_Z_NEG 	= 32'hC1CC0000,							// -51/2 = -25.5 in IEEE floating point
+	parameter BOUNDING_BOX_X 				= 32'h42080000,							// 8.5*4 = 34 in IEEE floating point
+	parameter BOUNDING_BOX_Y				= 32'h42080000,
+	parameter BOUNDING_BOX_Z				= 32'h42080000,
+	parameter HALF_BOUNDING_BOX_X_POS	= 32'h41880000,							// 34/2 = 17 in IEEE floating point
+	parameter HALF_BOUNDING_BOX_Y_POS	= 32'h41880000,
+	parameter HALF_BOUNDING_BOX_Z_POS	= 32'h41880000,
+	parameter HALF_BOUNDING_BOX_X_NEG	= 32'hC1880000,							// -34/2 = -17 in IEEE floating point
+	parameter HALF_BOUNDING_BOX_Y_NEG	= 32'hC1880000,
+	parameter HALF_BOUNDING_BOX_Z_NEG	= 32'hC1880000,
+	//parameter BOUNDING_BOX_X				= 32'h426E0000,							// 8.5*7 = 59.5 in IEEE floating point		//32'h42D80000,							// 12*9 = 108 in IEEE floating point
+	//parameter BOUNDING_BOX_Y				= 32'h424C0000,							// 8.5*6 = 51 in IEEE floating point		//32'h42D80000,							// 12*9 = 108 in IEEE floating point
+	//parameter BOUNDING_BOX_Z				= 32'h424C0000,							// 8.5*6 = 51 in IEEE floating point		//32'h42A80000,							// 12*7 = 84 in IEEE floating point
+	//parameter HALF_BOUNDING_BOX_X_POS 	= 32'h41EE0000,							// 59.5/2 = 29.75 in IEEE floating point
+	//parameter HALF_BOUNDING_BOX_Y_POS 	= 32'h41CC0000,							// 51/2 = 25.5 in IEEE floating point
+	//parameter HALF_BOUNDING_BOX_Z_POS 	= 32'h41CC0000,							// 51/2 = 25.5 in IEEE floating point
+	//parameter HALF_BOUNDING_BOX_X_NEG 	= 32'hC1EE0000,							// -59.5/2 = -29.75 in IEEE floating point
+	//parameter HALF_BOUNDING_BOX_Y_NEG 	= 32'hC1CC0000,							// -51/2 = -25.5 in IEEE floating point
+	//parameter HALF_BOUNDING_BOX_Z_NEG 	= 32'hC1CC0000,							// -51/2 = -25.5 in IEEE floating point
 	// Force Evaluation parameters
 	parameter SEGMENT_NUM					= 9,//14,
 	parameter SEGMENT_WIDTH					= 4,

@@ -544,6 +544,7 @@ module RL_LJ_Top_64_Cells
 		.CELL_Y(CELL_Y),
 		.CELL_Z(CELL_Z),
 		// Dataset defined parameters
+		.CELL_ID_WIDTH(CELL_ID_WIDTH),
 		.PARTICLE_ID_WIDTH(PARTICLE_ID_WIDTH),
 		.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
 		// Filter parameters
