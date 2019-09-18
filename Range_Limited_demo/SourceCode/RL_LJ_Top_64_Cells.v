@@ -143,6 +143,7 @@ module RL_LJ_Top_64_Cells
 	output ref_force_buffer_full,
 	output neighbor_force_buffer_full_1,
 	output neighbor_force_buffer_full_2,
+	// These valid bits are for conflict resolving, don't mix them up with the valid bits in force evaluation module
 	output reg ref_force_valid,
 	output reg neighbor_force_valid_1,
 	output reg neighbor_force_valid_2,
@@ -188,6 +189,7 @@ module RL_LJ_Top_64_Cells
 	//// Signals handles the reference output valid
 	// Special signal to handle the output valid for the last reference particle
 	wire FSM_almost_done_generation;
+	wire last_ref_force_written;
 	
 	wire [FORCE_EVAL_FIFO_DATA_WIDTH-1:0] ref_force_data_to_FIFO;
 	wire [FORCE_EVAL_FIFO_DATA_WIDTH-1:0] neighbor_force_data_to_FIFO_1;
@@ -517,6 +519,7 @@ module RL_LJ_Top_64_Cells
 		.ForceEval_to_FSM_all_buffer_empty(ForceEval_to_FSM_all_buffer_empty),								// input									
 		.Cell_to_FSM_read_success_bit(Cell_to_FSM_read_success_bit),
 		.all_pipelines_done_reading(all_pipelines_done_reading),
+		.last_ref_force_written(last_ref_force_written),
 		
 		.FSM_to_Cell_read_addr(FSM_to_Cell_read_addr),																// output [(NUM_NEIGHBOR_CELLS+1)*CELL_ADDR_WIDTH-1:0] 
 		// Ports connect to Force Evaluation Unit						// Only when all the filter buffers are empty, then the FSM will move on to the next reference particle
@@ -589,6 +592,7 @@ module RL_LJ_Top_64_Cells
 		
 		.out_back_pressure_to_input(ForceEval_to_FSM_backpressure),							//output [NUM_FILTER-1:0] 							// backpressure signal to stop new data arrival from particle memory
 		.out_all_buffer_empty_to_input(ForceEval_to_FSM_all_buffer_empty),				//output													// Only when all the filter buffers are empty, then the FSM will move on to the next reference particle
+		.last_ref_force_written(last_ref_force_written),
 		.out_ref_particle_data(ref_force_data_to_FIFO),
 		.out_neighbor_particle_data_1(neighbor_force_data_to_FIFO_1),
 		.out_neighbor_particle_data_2(neighbor_force_data_to_FIFO_2)

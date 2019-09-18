@@ -7,6 +7,7 @@ module RL_LJ_Topest_Top_64_Cells
 	// High level parameters
 	parameter NUM_EVAL_UNIT					= 1,											// # of evaluation units in the design
 	parameter RDADDR_ARBITER_SIZE			= 5,
+	parameter RDADDR_ARBITER_BOTTOM_SIZE = 4,
 	parameter RDADDR_ARBITER_MSB			= 16,
 	parameter FORCE_WTADDR_ARBITER_SIZE	= 6,
 	parameter FORCE_WTADDR_ARBITER_MSB	= 32,
@@ -142,9 +143,43 @@ module RL_LJ_Topest_Top_64_Cells
 	wire all_pipelines_done_reading;
 	assign all_pipelines_done_reading = (out_home_cell_evaluation_done == {(NUM_PIPELINES){1'b1}}) ? 1'b1 : 1'b0;
 	
+	/* Local motion update start triggers history and the history bit is held. Once the last motion update start is high, all history
+	   bits are high and motion update start is high immediately. Since local motion update start signal only keeps for 1 cycle, history
+		bits are reset in the next cycle and motion update start is down. */
 	wire [NUM_PIPELINES-1:0] Local_Motion_Update_start;
 	wire Motion_Update_start;
-	assign Motion_Update_start	 = (Local_Motion_Update_start == {(NUM_PIPELINES){1'b1}}) ? 1'b1 : 1'b0;
+	reg [NUM_PIPELINES-1:0] Local_Motion_Update_start_history;
+
+	assign Motion_Update_start	 = (Local_Motion_Update_start_history == {(NUM_PIPELINES){1'b1}}) ? 1'b1 : 1'b0;
+	
+	genvar n;
+	generate
+		for (n = 0; n < NUM_PIPELINES; n = n+1)
+			begin: MU_start_history
+			always@(posedge clk)
+				begin
+				if (rst)
+					begin
+					Local_Motion_Update_start_history[n] <= 1'b0;
+					end
+				else
+					begin
+					if (Local_Motion_Update_start[n] == 1'b1)
+						begin
+						Local_Motion_Update_start_history[n] <= 1'b1;
+						end
+					else if (Motion_Update_start)
+						begin
+						Local_Motion_Update_start_history[n] <= 1'b0;
+						end
+					else
+						begin
+						Local_Motion_Update_start_history[n] <= Local_Motion_Update_start_history[n];
+						end
+					end
+				end
+			end
+	endgenerate
 	
 	// Input to the position and velocity caches
 	wire Motion_Update_enable;
@@ -438,6 +473,7 @@ module RL_LJ_Topest_Top_64_Cells
 		.CELL_ID_WIDTH(CELL_ID_WIDTH),
 		.NUM_FILTER(NUM_FILTER),
 		.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+		.RDADDR_ARBITER_BOTTOM_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 		.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB),
 		.TOTAL_CELL_NUM(TOTAL_CELL_NUM),
 		.DATA_WIDTH(DATA_WIDTH)
@@ -503,9 +539,7 @@ module RL_LJ_Topest_Top_64_Cells
 		.PARTICLE_ID_WIDTH(PARTICLE_ID_WIDTH),
 		.FORCE_WTADDR_ARBITER_SIZE(FORCE_WTADDR_ARBITER_SIZE),
 		.FORCE_WTADDR_ARBITER_MSB(FORCE_WTADDR_ARBITER_MSB),
-		.FORCE_EVAL_FIFO_DATA_WIDTH(FORCE_EVAL_FIFO_DATA_WIDTH),
-		.FORCE_EVAL_FIFO_DEPTH(FORCE_EVAL_FIFO_DEPTH),
-		.FORCE_EVAL_FIFO_ADDR_WIDTH(FORCE_EVAL_FIFO_ADDR_WIDTH)
+		.FORCE_EVAL_FIFO_DATA_WIDTH(FORCE_EVAL_FIFO_DATA_WIDTH)
 	)
 	Force_Writeback_Arbitration_Unit
 	(

@@ -8,6 +8,7 @@ module RL_LJ_Topest_Top_64_Cells_tb;
 	// High level parameters
 	parameter NUM_EVAL_UNIT					= 1;											// # of evaluation units in the design
 	parameter RDADDR_ARBITER_SIZE			= 5;
+	parameter RDADDR_ARBITER_BOTTOM_SIZE = 4;
 	parameter RDADDR_ARBITER_MSB			= 16;
 	parameter FORCE_WTADDR_ARBITER_SIZE	= 6;
 	parameter FORCE_WTADDR_ARBITER_MSB	= 32;

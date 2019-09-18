@@ -93,6 +93,7 @@ int Gen_Sim_Script(std::string* common_path, std::string* sim_script_out_path, s
 	fout << " vlog -vlog01compat -work work " << path << "Local_global_mapping.v\n";
 	fout << " vlog -vlog01compat -work work " << path << "Arbitration_Unit.v\n";
 	fout << " vlog -vlog01compat -work work " << path << "Read_Addr_Arbiter.v\n";
+	fout << " vlog -vlog01compat -work work " << path << "Read_Addr_Arbiter_Bottom.v\n";
 	fout << " vlog -vlog01compat -work work " << path << "Force_Writeback_Arbiter.v\n";
 	
 	// Generate Force Evaluation Units
@@ -136,6 +137,7 @@ int Gen_Sim_Script(std::string* common_path, std::string* sim_script_out_path, s
 	fout << " vlog -vlog01compat -work work " << path << "force_cache_tb.v\n";
 	fout << " vlog -vlog01compat -work work " << path << "Force_Cache_Input_Buffer.v\n";
 	fout << " vlog -vlog01compat -work work " << path << "Partial_Force_Acc.v\n";
+	fout << " vlog -vlog01compat -work work " << path << "Partial_Force_Acc_64_Cells.v\n";
 	fout << " vlog -vlog01compat -work work " << path << "Partial_Force_Acc_tb.v\n";
 	fout << " vlog -vlog01compat -work work " << path << "FIFO.v\n";
 	// Generate Motion Update Units
@@ -207,6 +209,12 @@ int Gen_Sim_Script(std::string* common_path, std::string* sim_script_out_path, s
 	fout << "# #\n";
 	fout << "# # Run the simulation.\n";
 	fout << " add wave *\n";
+	fout << " add wave -group empty\n";
+	fout << " add wave -group top /RL_LJ_Topest_64_Cells/*\n";
+	fout << " add wave -group MU /RL_LJ_Topest_64_Cells/Motion_Update/*\n";
+	fout << " add wave -group All_Force /RL_LJ_Topest_64_Cells/All_Force_Caches/*\n";
+	fout << " add wave -group Force_111 /RL_LJ_Topest_64_Cells/All_Force_Caches/Force_1_1_1/*\n";
+	fout << " add wave -group pipe0 /RL_LJ_Topest_64_Cells/Pipepine[0]/RL_LJ_Top_64_Cells/*\n";
 	fout << " view structure\n";
 	fout << " view signals\n\n";
 
@@ -216,7 +224,7 @@ int Gen_Sim_Script(std::string* common_path, std::string* sim_script_out_path, s
 	// Set display radix
 	fout << " radix hex\n";
 	// Set default simulation run time
-	fout << " run 1000ns\n";
+	fout << " run 100ns\n";
 
 	fout << "# #\n";
 	fout << "# # Report success to the shell.\n";

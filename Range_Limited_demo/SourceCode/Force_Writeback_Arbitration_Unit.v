@@ -22,9 +22,7 @@ module Force_Writeback_Arbitration_Unit
 	parameter PARTICLE_ID_WIDTH				= CELL_ID_WIDTH*3+CELL_ADDR_WIDTH,
 	parameter FORCE_WTADDR_ARBITER_SIZE		= 6,
 	parameter FORCE_WTADDR_ARBITER_MSB		= 32,
-	parameter FORCE_EVAL_FIFO_DATA_WIDTH	= 113,
-	parameter FORCE_EVAL_FIFO_DEPTH			= 128,
-	parameter FORCE_EVAL_FIFO_ADDR_WIDTH	= 7
+	parameter FORCE_EVAL_FIFO_DATA_WIDTH	= 113
 )
 (
 	input clk,

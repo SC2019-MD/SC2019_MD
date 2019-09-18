@@ -96,6 +96,7 @@ module RL_LJ_Evaluation_Unit_64_Cells
 	
 	output [NUM_FILTER-1:0] out_back_pressure_to_input,						// backpressure signal to stop new data arrival from particle memory
 	output out_all_buffer_empty_to_input,											// Output to FSM that generate particle pairs. Only when all the filter buffers are empty, then the FSM will move on to the next reference particle
+	output last_ref_force_written,													// Tell pair generator the last force is written and ok to proceed
 	output [FORCE_EVAL_FIFO_DATA_WIDTH-1:0] out_ref_particle_data,
 	output [FORCE_EVAL_FIFO_DATA_WIDTH-1:0] out_neighbor_particle_data_1,
 	output [FORCE_EVAL_FIFO_DATA_WIDTH-1:0] out_neighbor_particle_data_2
@@ -108,10 +109,56 @@ module RL_LJ_Evaluation_Unit_64_Cells
 	wire [DATA_WIDTH-1:0] out_ref_LJ_Force_Z;
 	wire out_ref_force_valid;
 	wire ForceEval_ref_output_valid;
+	wire out_neighbor_force_valid;
+	
+	reg [5:0] no_force_valid_counter;
+	reg pairgen_done;
 	
 	// It's easier to take the almost done generation signal as the input and assemble the final valid bit here. 
-	assign out_ref_force_valid = ForceEval_ref_output_valid || in_from_FSM_almost_done_generation;
+	assign last_ref_force_written = ((no_force_valid_counter == 40) & pairgen_done);
+	assign out_ref_force_valid = ForceEval_ref_output_valid || last_ref_force_written;
 	assign out_ref_particle_data = {out_ref_LJ_Force_Z, out_ref_LJ_Force_Y, out_ref_LJ_Force_X, out_ref_particle_id, out_ref_force_valid};
+	
+	// Get almost done signal from pair generator and write the ref force back if no neighbor force valid in 10 cycles. 
+	always@(posedge clk)
+		begin
+		if (rst)
+			begin
+			pairgen_done <= 1'b0;
+			no_force_valid_counter <= 0;
+			end
+		else
+			begin
+			if (in_from_FSM_almost_done_generation) 
+				begin
+				pairgen_done <= 1'b1;
+				end
+			// If valid, reset the pairgen done signal so it keeps high until the ref force is written back
+			else if (last_ref_force_written)
+				begin
+				pairgen_done <= 1'b0;
+				end
+			else
+				begin
+				pairgen_done <= pairgen_done;
+				end
+			if (pairgen_done)
+				begin
+				if (out_neighbor_force_valid)
+					begin
+					no_force_valid_counter <= 0;
+					end
+				else
+					begin
+					no_force_valid_counter <= no_force_valid_counter + 1'b1;
+					end
+				end
+			else
+				begin
+				no_force_valid_counter <= 0;
+				end
+			end
+		end
 	
 	// Neighbor cell particles output assembled
 	wire [PARTICLE_ID_WIDTH-1:0] out_neighbor_particle_id;
@@ -119,7 +166,6 @@ module RL_LJ_Evaluation_Unit_64_Cells
 	wire [DATA_WIDTH-1:0] out_neighbor_LJ_Force_X;
 	wire [DATA_WIDTH-1:0] out_neighbor_LJ_Force_Y;
 	wire [DATA_WIDTH-1:0] out_neighbor_LJ_Force_Z; 	// 222 223 231 232 233 311 312 || 313 321 322 323 331 332 333
-	wire out_neighbor_force_valid;
 	
 	// Only one neighbor output is non-zero, the 9-bit number is 313 (actually can be made 6-bit)
 	assign out_neighbor_particle_data_1 = (out_neighbor_particle_id[PARTICLE_ID_WIDTH-1:CELL_ADDR_WIDTH] < 9'b011001011) ? {out_neighbor_LJ_Force_Z, out_neighbor_LJ_Force_Y, out_neighbor_LJ_Force_X, out_neighbor_particle_id, out_neighbor_force_valid} : 0;
@@ -132,8 +178,12 @@ module RL_LJ_Evaluation_Unit_64_Cells
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// assign the neighbor particle partial force valid, connected directly to force evaluation unit
 	wire evaluated_force_valid;
+	// Otherwise home cell forces will be calculated twice
+	wire not_in_homecell;
+	// If 222, invalid
+	assign not_in_homecell = (out_neighbor_particle_id[PARTICLE_ID_WIDTH-1:CELL_ADDR_WIDTH] == 9'b010010010) ? 1'b0 : 1'b1;
 	// assign the output port for neighbor partial force valid
-	assign out_neighbor_force_valid = evaluated_force_valid;
+	assign out_neighbor_force_valid = evaluated_force_valid & not_in_homecell;
 	// assign the neighbor particle partial force, should negate the sign bit to signify the mutual force
 	wire [DATA_WIDTH-1:0] LJ_Force_X_wire;
 	wire [DATA_WIDTH-1:0] LJ_Force_Y_wire;
@@ -278,7 +328,7 @@ module RL_LJ_Evaluation_Unit_64_Cells
 */	
 	// Partial force accumulator
 	// Working on reference particle
-	Partial_Force_Acc
+	Partial_Force_Acc_64_Cells
 	#(
 		.DATA_WIDTH(DATA_WIDTH),
 		.PARTICLE_ID_WIDTH(PARTICLE_ID_WIDTH)							// # of bit used to represent particle ID, 9*9*7 cells, each 4-bit, each cell have max of 200 particles, 8-bit

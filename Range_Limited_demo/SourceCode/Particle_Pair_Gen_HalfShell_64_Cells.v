@@ -90,6 +90,7 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 	input  ForceEval_to_FSM_all_buffer_empty,									// Only when all the filter buffers are empty, then the FSM will move on to the next reference particle
 	input  [NUM_NEIGHBOR_CELLS:0] Cell_to_FSM_read_success_bit,
 	input  all_pipelines_done_reading,
+	input  last_ref_force_written,
 	
 	output [(NUM_NEIGHBOR_CELLS+1)*CELL_ADDR_WIDTH-1:0] FSM_to_Cell_read_addr,
 	output reg [NUM_FILTER*3*DATA_WIDTH-1:0] FSM_to_ForceEval_ref_particle_position,
@@ -156,7 +157,7 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 	reg [CELL_ID_WIDTH-1:0] cell_being_processed_id;
 	assign cellz = cell_being_processed_id;
 	// Counter that wait for the last pair to finish evaluation (17+14=31 cycles)
-	reg [5:0] wait_finish_counter;
+	reg [7:0] wait_finish_counter;
 	reg [5:0] wait_next_homecell_counter;
 	// Delay registers to record the previous backpressure input (since there are 2 cycles before the backpressure is here and the data actually stop generating)
 	// Use this sigal to determine whether the output particle pairs should be valid
@@ -446,7 +447,6 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 				// 1st cycle: assign the read address, 2nd cycle: read address appear on RAM, 3rd cycle: data read out at the end of this cycle
 				READ_REF_PARTICLE:
 					begin
-					FSM_enable_reading <= {(NUM_NEIGHBOR_CELLS+1){1'b1}};
 					wait_next_homecell_counter <= 0;
 					cell_being_processed_id <= cell_being_processed_id;
 					// Special signal to handle the output valid for the last reference particle
@@ -479,6 +479,7 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 					if(wait_finish_counter == 0)
 						//	The first cycle read the reference particle
 						begin
+						FSM_enable_reading <= 1;															// Read ref particle only
 						FSM_Filter_Pause_Processing <= FSM_Filter_Pause_Processing;				// don't care since it doesn't affect the pair_valid flags
 						wait_finish_counter <= wait_finish_counter + 1'b1;
 						FSM_Filter_Read_Addr[CELL_ADDR_WIDTH-1:0] <= FSM_Ref_Particle_Addr;
@@ -486,6 +487,7 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 						end
 					else if(wait_finish_counter == 1)
 						begin
+						FSM_enable_reading <= {(NUM_NEIGHBOR_CELLS+1){1'b1}};						// Begin prefetching
 						FSM_Filter_Pause_Processing <= FSM_Filter_Pause_Processing;				// don't care since it doesn't affect the pair_valid flags
 						if (Cell_to_FSM_read_success_bit[0])				// Make sure do not proceed without the ref particle data fetched
 						//	The second cycle prefetch the neighbor particles
@@ -510,6 +512,7 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 					else
 						//	The third cycle prefetch the 2nd neighbor particles
 						begin
+						FSM_enable_reading <= {(NUM_NEIGHBOR_CELLS+1){1'b1}};		// Begin the 2nd round of prefetching
 						
 						// filter 0 prefetch
 						if (Cell_to_FSM_read_success_bit[0])
@@ -1233,7 +1236,6 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 					wait_next_homecell_counter <= 0;
 					cell_being_processed_id <= cell_being_processed_id;
 					// Special signal to handle the output valid for the last reference particle
-					FSM_almost_done_generation <= 1'b0;
 					// FSM to Output
 					FSM_to_Output_homecell_done <= 1'b0;
 					FSM_all_homecells_done <= 1'b0;
@@ -1256,12 +1258,14 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 					// if there are still reference particles not traversed, increment the read address (the fetch will be done in READ_REF_PARTICLE stage)
 					if(FSM_Ref_Particle_Addr < FSM_Cell_Particle_Num[CELL_ADDR_WIDTH-1:0])
 						begin
+						FSM_almost_done_generation <= 1'b0;
 						FSM_Ref_Particle_Addr <= FSM_Ref_Particle_Addr + 1'b1;
 						state <= READ_REF_PARTICLE;
 						end
 					// If all reference particles has been traversed, then move on to the wait stage
 					else
 						begin
+						FSM_almost_done_generation <= 1'b1;
 						FSM_Ref_Particle_Addr <= FSM_Ref_Particle_Addr;
 						state <= WAIT_FOR_FINISH;
 						end
@@ -1270,7 +1274,8 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 				// After the last refernece particle is done, wait for the last pair of paricles traverse the entire pipeline
 				WAIT_FOR_FINISH:
 					begin
-					wait_finish_counter <= wait_finish_counter + 1'b1;
+					FSM_almost_done_generation <= 1'b0;
+					wait_finish_counter <= 0;
 					wait_next_homecell_counter <= 0;
 					cell_being_processed_id <= cell_being_processed_id;
 					// FSM to Output
@@ -1296,14 +1301,10 @@ module Particle_Pair_Gen_HalfShell_64_Cells
 					// Set the almost done a few cycles before the wait process ends, thus give it more time to let the force cache to write in the value
 					// After entering the next state, the motion update will start and new value can no longer write in the force cache
 					// The value 35 here is depending on the wait cycle below, always make it 5 less than the threshold below
-					if(wait_finish_counter == 35)
-						FSM_almost_done_generation <= 1'b1;
-					else
-						FSM_almost_done_generation <= 1'b0;
 				
 					// Assgin the next state
 					// !!!!! The wait cycle 40 is given arbitraily, may need for some adjustments
-					if(wait_finish_counter < 40)
+					if(~last_ref_force_written)
 						state <= WAIT_FOR_FINISH;
 					else
 						state <= DONE;

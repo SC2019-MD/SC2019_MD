@@ -5,6 +5,7 @@ module Arbitration_Unit
 	parameter CELL_ADDR_WIDTH			= 7,
 	parameter CELL_ID_WIDTH				= 3,
 	parameter RDADDR_ARBITER_SIZE		= 5,
+	parameter RDADDR_ARBITER_BOTTOM_SIZE = 4,
 	parameter RDADDR_ARBITER_MSB		= 16,
 	parameter TOTAL_CELL_NUM			= 64
 )
@@ -121,56 +122,56 @@ assign Cell_to_FSM_read_success_bit[16*(NUM_NEIGHBOR_CELLS+1)-1:15*(NUM_NEIGHBOR
 reg [TOTAL_CELL_NUM*CELL_ADDR_WIDTH-1:0] reg_FSM_to_Cell_read_addr;
 assign FSM_to_Cell_read_addr = reg_FSM_to_Cell_read_addr;
 
-wire [4:0] arbiter_1_1_mid;
-wire [4:0] arbiter_1_2_mid;
-wire [4:0] arbiter_1_3_mid;
-wire [4:0] arbiter_1_4_mid;
-wire [4:0] arbiter_2_1_mid;
-wire [4:0] arbiter_2_2_mid;
-wire [4:0] arbiter_2_3_mid;
-wire [4:0] arbiter_2_4_mid;
-wire [4:0] arbiter_3_1_mid;
-wire [4:0] arbiter_3_2_mid;
-wire [4:0] arbiter_3_3_mid;
-wire [4:0] arbiter_3_4_mid;
-wire [4:0] arbiter_4_1_mid;
-wire [4:0] arbiter_4_2_mid;
-wire [4:0] arbiter_4_3_mid;
-wire [4:0] arbiter_4_4_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_1_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_2_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_3_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_4_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_1_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_2_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_3_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_4_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_1_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_2_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_3_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_4_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_1_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_2_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_3_mid;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_4_mid;
 
-wire [4:0] arbiter_1_1_top;
-wire [4:0] arbiter_1_2_top;
-wire [4:0] arbiter_1_3_top;
-wire [4:0] arbiter_1_4_top;
-wire [4:0] arbiter_2_1_top;
-wire [4:0] arbiter_2_2_top;
-wire [4:0] arbiter_2_3_top;
-wire [4:0] arbiter_2_4_top;
-wire [4:0] arbiter_3_1_top;
-wire [4:0] arbiter_3_2_top;
-wire [4:0] arbiter_3_3_top;
-wire [4:0] arbiter_3_4_top;
-wire [4:0] arbiter_4_1_top;
-wire [4:0] arbiter_4_2_top;
-wire [4:0] arbiter_4_3_top;
-wire [4:0] arbiter_4_4_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_1_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_2_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_3_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_1_4_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_1_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_2_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_3_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_2_4_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_1_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_2_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_3_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_3_4_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_1_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_2_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_3_top;
+wire [RDADDR_ARBITER_SIZE-1:0] arbiter_4_4_top;
 
-wire [4:0] arbiter_1_1_bottom;
-wire [4:0] arbiter_1_2_bottom;
-wire [4:0] arbiter_1_3_bottom;
-wire [4:0] arbiter_1_4_bottom;
-wire [4:0] arbiter_2_1_bottom;
-wire [4:0] arbiter_2_2_bottom;
-wire [4:0] arbiter_2_3_bottom;
-wire [4:0] arbiter_2_4_bottom;
-wire [4:0] arbiter_3_1_bottom;
-wire [4:0] arbiter_3_2_bottom;
-wire [4:0] arbiter_3_3_bottom;
-wire [4:0] arbiter_3_4_bottom;
-wire [4:0] arbiter_4_1_bottom;
-wire [4:0] arbiter_4_2_bottom;
-wire [4:0] arbiter_4_3_bottom;
-wire [4:0] arbiter_4_4_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_1_1_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_1_2_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_1_3_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_1_4_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_2_1_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_2_2_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_2_3_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_2_4_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_3_1_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_3_2_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_3_3_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_3_4_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_4_1_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_4_2_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_4_3_bottom;
+wire [RDADDR_ARBITER_BOTTOM_SIZE-1:0] arbiter_4_4_bottom;
 
 always@(*)
 	begin
@@ -4882,10 +4883,10 @@ Read_Addr_Arbiter_1_1_top
 	.Arbitration_Result(arbiter_1_1_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_1_1_bottom
@@ -4900,8 +4901,6 @@ Read_Addr_Arbiter_1_1_bottom
 	.enable3(enable_reading_4_2[5]),
 	.addr4(FSM_to_Cell_read_addr_4_4[12*CELL_ADDR_WIDTH-1:11*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_4[11]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_1_1_bottom)
 );
 
@@ -4951,10 +4950,10 @@ Read_Addr_Arbiter_1_2_top
 	.Arbitration_Result(arbiter_1_2_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_1_2_bottom
@@ -4969,8 +4968,6 @@ Read_Addr_Arbiter_1_2_bottom
 	.enable3(enable_reading_4_2[8]),
 	.addr4(FSM_to_Cell_read_addr_4_3[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_3[5]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_1_2_bottom)
 );
 
@@ -5020,10 +5017,10 @@ Read_Addr_Arbiter_1_3_top
 	.Arbitration_Result(arbiter_1_3_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_1_3_bottom
@@ -5038,8 +5035,6 @@ Read_Addr_Arbiter_1_3_bottom
 	.enable3(enable_reading_4_3[8]),
 	.addr4(FSM_to_Cell_read_addr_4_4[6*CELL_ADDR_WIDTH-1:5*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_4[5]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_1_3_bottom)
 );
 
@@ -5089,10 +5084,10 @@ Read_Addr_Arbiter_1_4_top
 	.Arbitration_Result(arbiter_1_4_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_1_4_bottom
@@ -5107,8 +5102,6 @@ Read_Addr_Arbiter_1_4_bottom
 	.enable3(enable_reading_4_3[11]),
 	.addr4(FSM_to_Cell_read_addr_4_4[9*CELL_ADDR_WIDTH-1:8*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_4[8]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_1_4_bottom)
 );
 
@@ -5158,10 +5151,10 @@ Read_Addr_Arbiter_2_1_top
 	.Arbitration_Result(arbiter_2_1_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_2_1_bottom
@@ -5176,8 +5169,6 @@ Read_Addr_Arbiter_2_1_bottom
 	.enable3(enable_reading_1_4[11]),
 	.addr4(FSM_to_Cell_read_addr_2_4[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_2_4[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_2_1_bottom)
 );
 
@@ -5227,10 +5218,10 @@ Read_Addr_Arbiter_2_2_top
 	.Arbitration_Result(arbiter_2_2_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_2_2_bottom
@@ -5245,8 +5236,6 @@ Read_Addr_Arbiter_2_2_bottom
 	.enable3(enable_reading_1_3[5]),
 	.addr4(FSM_to_Cell_read_addr_2_1[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_2_1[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_2_2_bottom)
 );
 
@@ -5296,10 +5285,10 @@ Read_Addr_Arbiter_2_3_top
 	.Arbitration_Result(arbiter_2_3_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_2_3_bottom
@@ -5314,8 +5303,6 @@ Read_Addr_Arbiter_2_3_bottom
 	.enable3(enable_reading_1_4[5]),
 	.addr4(FSM_to_Cell_read_addr_2_2[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_2_2[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_2_3_bottom)
 );
 
@@ -5365,10 +5352,10 @@ Read_Addr_Arbiter_2_4_top
 	.Arbitration_Result(arbiter_2_4_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_2_4_bottom
@@ -5383,8 +5370,6 @@ Read_Addr_Arbiter_2_4_bottom
 	.enable3(enable_reading_1_4[8]),
 	.addr4(FSM_to_Cell_read_addr_2_3[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_2_3[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_2_4_bottom)
 );
 
@@ -5434,10 +5419,10 @@ Read_Addr_Arbiter_3_1_top
 	.Arbitration_Result(arbiter_3_1_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_3_1_bottom
@@ -5452,8 +5437,6 @@ Read_Addr_Arbiter_3_1_bottom
 	.enable3(enable_reading_2_4[11]),
 	.addr4(FSM_to_Cell_read_addr_3_4[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_3_4[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_3_1_bottom)
 );
 
@@ -5503,10 +5486,10 @@ Read_Addr_Arbiter_3_2_top
 	.Arbitration_Result(arbiter_3_2_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_3_2_bottom
@@ -5521,8 +5504,6 @@ Read_Addr_Arbiter_3_2_bottom
 	.enable3(enable_reading_2_3[5]),
 	.addr4(FSM_to_Cell_read_addr_3_1[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_3_1[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_3_2_bottom)
 );
 
@@ -5572,10 +5553,10 @@ Read_Addr_Arbiter_3_3_top
 	.Arbitration_Result(arbiter_3_3_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_3_3_bottom
@@ -5590,8 +5571,6 @@ Read_Addr_Arbiter_3_3_bottom
 	.enable3(enable_reading_2_4[5]),
 	.addr4(FSM_to_Cell_read_addr_3_2[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_3_2[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_3_3_bottom)
 );
 
@@ -5641,10 +5620,10 @@ Read_Addr_Arbiter_3_4_top
 	.Arbitration_Result(arbiter_3_4_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_3_4_bottom
@@ -5659,8 +5638,6 @@ Read_Addr_Arbiter_3_4_bottom
 	.enable3(enable_reading_2_4[8]),
 	.addr4(FSM_to_Cell_read_addr_3_3[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_3_3[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_3_4_bottom)
 );
 
@@ -5710,10 +5687,10 @@ Read_Addr_Arbiter_4_1_top
 	.Arbitration_Result(arbiter_4_1_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_4_1_bottom
@@ -5728,8 +5705,6 @@ Read_Addr_Arbiter_4_1_bottom
 	.enable3(enable_reading_3_4[11]),
 	.addr4(FSM_to_Cell_read_addr_4_4[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_4[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_4_1_bottom)
 );
 
@@ -5779,10 +5754,10 @@ Read_Addr_Arbiter_4_2_top
 	.Arbitration_Result(arbiter_4_2_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_4_2_bottom
@@ -5797,8 +5772,6 @@ Read_Addr_Arbiter_4_2_bottom
 	.enable3(enable_reading_3_3[5]),
 	.addr4(FSM_to_Cell_read_addr_4_1[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_1[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_4_2_bottom)
 );
 
@@ -5848,10 +5821,10 @@ Read_Addr_Arbiter_4_3_top
 	.Arbitration_Result(arbiter_4_3_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_4_3_bottom
@@ -5866,8 +5839,6 @@ Read_Addr_Arbiter_4_3_bottom
 	.enable3(enable_reading_3_4[5]),
 	.addr4(FSM_to_Cell_read_addr_4_2[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_2[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_4_3_bottom)
 );
 
@@ -5917,10 +5888,10 @@ Read_Addr_Arbiter_4_4_top
 	.Arbitration_Result(arbiter_4_4_top)
 );
 
-Read_Addr_Arbiter
+Read_Addr_Arbiter_Bottom
 #(
 	.CELL_ADDR_WIDTH(CELL_ADDR_WIDTH),
-	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_SIZE),
+	.RDADDR_ARBITER_SIZE(RDADDR_ARBITER_BOTTOM_SIZE),
 	.RDADDR_ARBITER_MSB(RDADDR_ARBITER_MSB)
 )
 Read_Addr_Arbiter_4_4_bottom
@@ -5935,8 +5906,6 @@ Read_Addr_Arbiter_4_4_bottom
 	.enable3(enable_reading_3_4[8]),
 	.addr4(FSM_to_Cell_read_addr_4_3[3*CELL_ADDR_WIDTH-1:2*CELL_ADDR_WIDTH]),
 	.enable4(enable_reading_4_3[2]),
-	.addr5({CELL_ADDR_WIDTH{1'b0}}),
-	.enable5(1'b0),
 	.Arbitration_Result(arbiter_4_4_bottom)
 );
 

@@ -157,14 +157,14 @@ module Force_Write_Back_Controller_64_Cells
 	assign cur_cell_y = CELL_Y;
 	assign cur_cell_z = CELL_Z;
 	// Extract the cell id from the incoming particle id
-//	wire [CELL_ID_WIDTH-1:0] particle_cell_x, particle_cell_y, particle_cell_z;
-//	assign {particle_cell_x, particle_cell_y, particle_cell_z} = in_particle_id[PARTICLE_ID_WIDTH-1:PARTICLE_ID_WIDTH-3*CELL_ID_WIDTH];
+	wire [3*CELL_ID_WIDTH-1:0] particle_cell;
+	assign particle_cell = in_particle_id[PARTICLE_ID_WIDTH-1:PARTICLE_ID_WIDTH-3*CELL_ID_WIDTH];
 	// Extract the particle read address from the incoming partile id
 	wire [CELL_ADDR_WIDTH-1:0] particle_address;
 	assign particle_address = in_particle_id[CELL_ADDR_WIDTH-1:0];
 	// Determine if the input is targeting this cell
-//	wire input_matching;
-//	assign input_matching = in_partial_force_valid && particle_cell_x == CELL_X && particle_cell_y == CELL_Y && particle_cell_z == CELL_Z;
+	wire input_matching;
+	assign input_matching = in_partial_force_valid && particle_cell != 0;
 	// Determine if the input requires particle that is being processed when making the selection between FIFO output or input to send down for processing
 	// Note: when making the occupied decision, use the delayed input information
 	wire particle_occupied;
@@ -236,7 +236,7 @@ module Force_Write_Back_Controller_64_Cells
 			delay_particle_address <= {(CELL_ADDR_WIDTH){1'b0}};
 			delay_in_partial_force <= {(3*DATA_WIDTH){1'b0}};
 			// For conpensating the one cycle delay to read from input FIFO, delay the control signal derived from the input information by one cycle
-			delay_input_matching <= 1'b1;
+			delay_input_matching <= 1'b0;
 			delay_input_buffer_empty <= 1'b1;
 			// For conpensating the one cycle delay of reading the previous value from force cache
 			delay_partial_force_to_accumulator <= {(3*DATA_WIDTH){1'b1}};
@@ -291,7 +291,7 @@ module Force_Write_Back_Controller_64_Cells
 			delay_particle_address <= particle_address;
 			delay_in_partial_force <= in_partial_force;
 			// For conpensating the one cycle delay to read from input FIFO, delay the control signal derived from the input information by one cycle
-			delay_input_matching <= 1'b1; // Originally input_matching
+			delay_input_matching <= input_matching; // Originally input_matching
 			delay_input_buffer_empty <= input_buffer_empty;
 			// For conpensating the one cycle delay of reading the previous value from force cache
 			delay_partial_force_to_accumulator <= partial_force_to_accumulator;
